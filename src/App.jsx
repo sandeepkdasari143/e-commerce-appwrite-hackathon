@@ -1,6 +1,6 @@
 import { useState } from 'react';
 // import AppWriteDB from './appwrite-services/database.service'
-import { ADD_TO_CART_FUNCTION_ID } from './appwrite-services/appWriteSecrets';
+import { ADD_TO_CART_FUNCTION_ID, REMOVE_FROM_CART_FUNCTION_ID } from './appwrite-services/appWriteSecrets';
 import AppWriteFunction from './appwrite-services/functions.service';
 
 const App = () => {
@@ -20,7 +20,8 @@ const App = () => {
       quantity: 34
     }
     // console.log(ADD_TO_CART_FUNCTION_ID, PAYLOAD)
-    const data = await functions.ExecuteFunc(ADD_TO_CART_FUNCTION_ID, PAYLOAD)
+    const data1 = await functions.ExecuteFunc(ADD_TO_CART_FUNCTION_ID, JSON.stringify(PAYLOAD));
+    const data = await functions.ExecuteFunc(REMOVE_FROM_CART_FUNCTION_ID, "db3dw45IDJWEy")
     if (data) {
       setData(data);
     }

@@ -10,7 +10,7 @@ class AppWriteFunction {
     async ExecuteFunc(FUNCTION_ID, PAYLOAD) {
         try {
             // console.log(FUNCTION_ID, PAYLOAD)
-            let response = await this.functions.createExecution(FUNCTION_ID, JSON.stringify(PAYLOAD));
+            let response = await this.functions.createExecution(FUNCTION_ID, PAYLOAD);
             response = JSON.parse(response.response);
             console.log(response)
             return response;

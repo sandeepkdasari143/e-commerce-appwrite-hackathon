@@ -49,6 +49,21 @@
             "events": [],
             "schedule": "",
             "timeout": 15
+        },
+        {
+            "$id": "64821e77c781a802a8de",
+            "name": "removeFromCart",
+            "runtime": "node-16.0",
+            "path": "functions/removeFromCart",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }

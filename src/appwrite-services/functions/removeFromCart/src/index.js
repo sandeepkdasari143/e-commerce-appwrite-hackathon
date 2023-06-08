@@ -1,13 +1,10 @@
 const sdk = require("node-appwrite");
-const { v4: uuidv4 } = require("uuid");
 
 module.exports = async function (req, res) {
   const client = new sdk.Client();
   const database = new sdk.Databases(client);
-  const cartItem = JSON.parse(req.payload);
 
-  const { customer_id, location_id, product_id, seller_id, quantity } =
-    cartItem;
+  const cart_id = req.payload;
 
   if (
     !req.variables["APPWRITE_FUNCTION_ENDPOINT"] ||
@@ -22,21 +19,19 @@ module.exports = async function (req, res) {
       .setProject(req.variables["APPWRITE_FUNCTION_PROJECT_ID"])
       .setKey(req.variables["APPWRITE_FUNCTION_API_KEY"])
       .setSelfSigned(true);
-
-    let newCartItem = {};
-    if (customer_id && location_id && product_id && seller_id && quantity) {
+    
+    if (cart_id) {
       try {
-        newCartItem = await database.createDocument(
+        await database.deleteDocument(
           req.variables["ECOMM_DB_ID"],
           req.variables["CART_COLLECTION_ID"],
-          "db3dw45IDJWEy",
-          cartItem
+          cart_id
         );
         return res.json({
           success: true,
           error: false,
-          message: "New Item is successfully added to cart :)",
-          data: newCartItem,
+          message: "Item is removed from cart :)",
+          cart_id
         });
       } catch (error) {
         return res.json({
@@ -49,7 +44,7 @@ module.exports = async function (req, res) {
       res.json({
         success: false,
         error: true,
-        message: "All Fields are required :(",
+        message: "Cart ID is required to remove it from cart:(",
       });
     }
   }
