@@ -1,5 +1,6 @@
 import { appwriteClient } from ".";
 import { Databases, ID} from 'appwrite';
+import { toast } from 'react-toastify';
 
 class AppWriteDB {
     db
@@ -13,7 +14,8 @@ class AppWriteDB {
             console.log(response)
             return response;
         } catch (error) {
-            console.log("ERROR in getAllDocs():: ",error.response)
+            console.log("ERROR in getAllDocs():: ", error.response)
+            toast.error(error.message);
         }
     }
 
@@ -24,6 +26,7 @@ class AppWriteDB {
             if(response.total>0) return response.documents;
         } catch (error) {
             console.log("ERROR in getAllDocs():: ", error.response)
+            toast.error(error.message);
         }
     }
 
@@ -34,6 +37,7 @@ class AppWriteDB {
             return response;
         } catch (error) {
             console.log("ERROR in getDoc():: ", error.response)
+            toast.error(error.message);
         }
     }
 
@@ -44,6 +48,7 @@ class AppWriteDB {
             return response;
         } catch (error) {
             console.log("ERROR in updateDoc():: ", error.response)
+            toast.error(error.message);
         }
     }
 
@@ -54,6 +59,7 @@ class AppWriteDB {
             return response;
         } catch (error) {
             console.log("ERROR in deleteDoc():: ", error.response)
+            toast.error(error.message);
         }
     }
 }

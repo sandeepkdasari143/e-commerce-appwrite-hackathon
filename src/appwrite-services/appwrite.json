@@ -1,0 +1,54 @@
+{
+    "projectId": "64816243e019cd985e39",
+    "projectName": "e-commerce-app",
+    "functions": [
+        {
+            "$id": "6481bd361127315583ed",
+            "name": "test-function-101",
+            "runtime": "node-16.0",
+            "path": "functions/test-function-101",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                ".env",
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "6481bd5c525110a6f3b8",
+            "name": "test-2",
+            "runtime": "node-16.0",
+            "path": "functions/test-2",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                ".env",
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "6481c1beb8f0b22e9f22",
+            "name": "addToCart",
+            "runtime": "node-16.0",
+            "path": "functions/addToCart",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                ".env",
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}

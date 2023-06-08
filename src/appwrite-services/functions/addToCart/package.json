@@ -1,0 +1,18 @@
+{
+  "name": "appwrite-function",
+  "version": "1.0.0",
+  "description": "This is the function that will add the product into the current user's Cart.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sandeep K. Dasari",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "node-appwrite": "^8.0.0",
+    "uuid": "^9.0.0"
+  }
+}

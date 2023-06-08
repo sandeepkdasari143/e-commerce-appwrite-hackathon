@@ -1,24 +1,33 @@
 import { useState } from 'react';
-import AppWriteDB from './appwrite-services/database.service'
-import { CART_ID, ECOMM_DB_ID } from './appwrite-services/appWriteSecrets';
+// import AppWriteDB from './appwrite-services/database.service'
+import { ADD_TO_CART_FUNCTION_ID } from './appwrite-services/appWriteSecrets';
+import AppWriteFunction from './appwrite-services/functions.service';
 
 const App = () => {
-  const db = new AppWriteDB();
-  const [cartName, setCartName] = useState("");
+  // const db = new AppWriteDB();
+  const functions = new AppWriteFunction();
+
+  // const [cartName, setCartName] = useState("");
   const [data, setData] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = await db.createDoc(ECOMM_DB_ID, CART_ID,{ 'cartName': cartName })
+    let PAYLOAD = {
+      seller_id: "2312342423",
+      location_id: "3242442412412",
+      customer_id: "3242423421423",
+      product_id: "s3rqr3453453",
+      quantity: 34
+    }
+    // console.log(ADD_TO_CART_FUNCTION_ID, PAYLOAD)
+    const data = await functions.ExecuteFunc(ADD_TO_CART_FUNCTION_ID, PAYLOAD)
     if (data) {
       setData(data);
     }
   }
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" onChange={(e) => setCartName(e.target.value)} value={cartName} />
       <button type='submit'>submit</button>
-
       <div>
         {JSON.stringify(data)}
       </div>
