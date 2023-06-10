@@ -16,7 +16,7 @@
             "execute": [],
             "events": [],
             "schedule": "",
-            "timeout": 15
+            "timeout": 240
         },
         {
             "$id": "6481bd5c525110a6f3b8",
@@ -32,7 +32,7 @@
             "execute": [],
             "events": [],
             "schedule": "",
-            "timeout": 15
+            "timeout": 240
         },
         {
             "$id": "6481c1beb8f0b22e9f22",
@@ -48,7 +48,7 @@
             "execute": [],
             "events": [],
             "schedule": "",
-            "timeout": 15
+            "timeout": 240
         },
         {
             "$id": "64821e77c781a802a8de",
@@ -63,7 +63,22 @@
             "execute": [],
             "events": [],
             "schedule": "",
-            "timeout": 15
+            "timeout": 240
+        },
+        {
+            "$id": "64830d48bfddd8faf498",
+            "name": "createProduct",
+            "runtime": "node-16.0",
+            "path": "functions/createProduct",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 240
         }
     ]
 }

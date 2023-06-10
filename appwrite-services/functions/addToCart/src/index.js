@@ -9,6 +9,8 @@ module.exports = async function (req, res) {
   const { customer_id, location_id, product_id, seller_id, quantity } =
     cartItem;
 
+  const {ECOMM_DB_ID, CART_COLLECTION_ID } = req.variables;
+
   if (
     !req.variables["APPWRITE_FUNCTION_ENDPOINT"] ||
     !req.variables["APPWRITE_FUNCTION_API_KEY"]
@@ -27,9 +29,9 @@ module.exports = async function (req, res) {
     if (customer_id && location_id && product_id && seller_id && quantity) {
       try {
         newCartItem = await database.createDocument(
-          req.variables["ECOMM_DB_ID"],
-          req.variables["CART_COLLECTION_ID"],
-          "db3dw45IDJWEy",
+          ECOMM_DB_ID,
+          CART_COLLECTION_ID,
+          sdk.ID.unique(),
           cartItem
         );
         return res.json({

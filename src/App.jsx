@@ -1,39 +1,79 @@
-import { useState } from 'react';
-// import AppWriteDB from './appwrite-services/database.service'
-import { ADD_TO_CART_FUNCTION_ID, REMOVE_FROM_CART_FUNCTION_ID } from './appwrite-services/appWriteSecrets';
-import AppWriteFunction from './appwrite-services/functions.service';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_THEME } from './redux-store/theme.slice';
+import { Routes, Route, Navigate} from "react-router-dom";
+import HomeLayout from './HomeLayout';
+import Home from './pages/Home';
+
+import LogIn from './pages/Authentication/LogIn';
+import SignUp from './pages/Authentication/SignUp';
+
+import DashboardHome from './Admin-Dashboard/pages/DashboardHome';
+import Orders from './Admin-Dashboard/pages/Orders';
+import Transactions from './Admin-Dashboard/pages/Transactions';
+import Stock from './Admin-Dashboard/pages/Stock';
+import AdminPanel from './Admin-Dashboard/pages/AdminPanel';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+
 
 const App = () => {
-  // const db = new AppWriteDB();
-  const functions = new AppWriteFunction();
 
-  // const [cartName, setCartName] = useState("");
-  const [data, setData] = useState(null);
+  const mode = useSelector(state => state.theme.mode);
+  const Theme = useSelector(state => state.theme.theme);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    let PAYLOAD = {
-      seller_id: "2312342423",
-      location_id: "3242442412412",
-      customer_id: "3242423421423",
-      product_id: "s3rqr3453453",
-      quantity: 34
+  const [theme, setTheme] = useState(null);
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const theme = createTheme(Theme)
+    setTheme(theme);
+  },[Theme])
+
+  // If the "theme" value of the context changes, then this useEffect will be called...
+  React.useEffect(()=>{
+    if(mode === "dark"){
+      document.documentElement.classList.add("dark");
+    }else{
+      document.documentElement.classList.remove("dark");
     }
-    // console.log(ADD_TO_CART_FUNCTION_ID, PAYLOAD)
-    const data1 = await functions.ExecuteFunc(ADD_TO_CART_FUNCTION_ID, JSON.stringify(PAYLOAD));
-    const data = await functions.ExecuteFunc(REMOVE_FROM_CART_FUNCTION_ID, "db3dw45IDJWEy")
-    if (data) {
-      setData(data);
+  },[mode])
+
+  // For Browser Default Mode...
+  React.useEffect(()=>{
+    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+      dispatch(SET_THEME('dark'))
+    }else{
+      dispatch(SET_THEME('light'))
     }
+  }, [dispatch])
+
+  const AdminProtectedRoute = ({children}) => {
+    const isAdmin = true;
+    if (isAdmin) {
+      return children;
+    }
+    return <Navigate to="/" />
   }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <button type='submit'>submit</button>
-      <div>
-        {JSON.stringify(data)}
-      </div>
-    </form>
-  )
+    <>
+      {theme && <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/login" element={<LogIn />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path="/" element={<HomeLayout />}>
+            <Route index element={<Home />} />
+          </Route>
+          <Route path="/admin/dashboard" element={<AdminProtectedRoute><DashboardHome /></AdminProtectedRoute>} />
+          <Route path="/admin/stock" element={<AdminProtectedRoute><Stock /></AdminProtectedRoute>} />
+          <Route path="/admin/orders" element={<AdminProtectedRoute><Orders /></AdminProtectedRoute>} />
+          <Route path="/admin/transactions" element={<AdminProtectedRoute><Transactions /></AdminProtectedRoute>} />
+          <Route path="/admin/panel" element={<AdminProtectedRoute><AdminPanel /></AdminProtectedRoute>} />
+        </Routes>
+      </ThemeProvider>}
+    </>
+  );
 }
 
 export default App
