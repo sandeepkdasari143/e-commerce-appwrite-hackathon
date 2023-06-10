@@ -25,6 +25,7 @@ const App = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
+  //Setting the MUI theme Object
   React.useEffect(() => {
     const theme = createTheme(Theme)
     setTheme(theme);
@@ -39,7 +40,7 @@ const App = () => {
     }
   },[mode])
 
-  // For Browser Default Mode...
+  // For Browser Default Theme Mode...
   React.useEffect(()=>{
     if(window.matchMedia('(prefers-color-scheme: dark)').matches){
       dispatch(SET_THEME('dark'))
@@ -51,7 +52,7 @@ const App = () => {
   const AdminProtectedRoute = ({children}) => {
     const isAdmin = true;
     if (isAdmin) {
-      return children;
+      return children
     }
     return <Navigate to="/" />
   }
@@ -59,19 +60,21 @@ const App = () => {
   return (
     <>
       {theme && <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/login" element={<LogIn />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path="/" element={<HomeLayout />}>
-            <Route index element={<Home />} />
-          </Route>
-          <Route path="/admin/dashboard" element={<AdminProtectedRoute><DashboardHome /></AdminProtectedRoute>} />
-          <Route path="/admin/stock" element={<AdminProtectedRoute><Stock /></AdminProtectedRoute>} />
-          <Route path="/admin/orders" element={<AdminProtectedRoute><Orders /></AdminProtectedRoute>} />
-          <Route path="/admin/transactions" element={<AdminProtectedRoute><Transactions /></AdminProtectedRoute>} />
-          <Route path="/admin/panel" element={<AdminProtectedRoute><AdminPanel /></AdminProtectedRoute>} />
-        </Routes>
-      </ThemeProvider>}
+          <CssBaseline />
+          <Routes>
+            <Route path="/login" element={<LogIn />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path="/" element={<HomeLayout />}>
+              <Route index element={<Home />} />
+            </Route>
+            <Route path="/admin/dashboard" element={<AdminProtectedRoute><DashboardHome /></AdminProtectedRoute>} />
+            <Route path="/admin/stock" element={<AdminProtectedRoute><Stock /></AdminProtectedRoute>} />
+            <Route path="/admin/orders" element={<AdminProtectedRoute><Orders /></AdminProtectedRoute>} />
+            <Route path="/admin/transactions" element={<AdminProtectedRoute><Transactions /></AdminProtectedRoute>} />
+            <Route path="/admin/panel" element={<AdminProtectedRoute><AdminPanel /></AdminProtectedRoute>} />
+          </Routes>
+        </ThemeProvider>
+      }
     </>
   );
 }

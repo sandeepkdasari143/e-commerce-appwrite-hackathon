@@ -129,7 +129,7 @@ const Orders = () => {
         { label: 'Monty Python and the Holy Grail', year: 1975 },
         ];
     return (
-        <div className='transition-all duration-200 linear h-[100vh] w-[100vw] dark:bg-[rgb(20,20,31)] bg-pink-100'>
+        <div className='transition-all duration-200 linear lg:h-[100vh] w-[100vw] dark:bg-[rgb(20,20,31)] bg-pink-50'>
             <DashboardHeader />
             <main className={styles.ordersWrapper}>
                 <DashboardSidebar />
@@ -148,7 +148,7 @@ const Orders = () => {
     )
 }
 const styles = {
-    ordersWrapper: "flex md:felx-col",
-    ordersContent: "p-5 transition-all duration-200 linear h-[92vh] md:w-[70%] lg:w-[85%] w-[100vh] dark:bg-[rgb(20,20,31)] bg-pink-100",
+    ordersWrapper: "flex flex-col md:flex-row",
+    ordersContent: "transition-all duration-200 linear h-full md:h-[92vh] md:w-[70%] lg:w-[85%] w-[100vw] dark:bg-[rgb(20,20,31)] bg-[#FDF4FF]",
 }
 export default Orders

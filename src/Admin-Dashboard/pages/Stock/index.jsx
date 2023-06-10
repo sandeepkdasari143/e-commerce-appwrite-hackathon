@@ -1,6 +1,6 @@
 import DashboardHeader from "../../components/DashboardHeader";
 import DashboardSidebar from "../../components/DashboardSidebar";
-import AddModal from "../../../components/ui-components/AddModal";
+import Modaal from "../../../components/ui-components/Modal";
 import ProductForm from "./ProductForm";
 import StockHeader from "./StockHeader";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,15 +26,15 @@ const Stock = () => {
                 </section>
             </main>
 
-            <AddModal
+            <Modaal
                     modalTitle={modalTitle}
-                    isAddModalOpen={isModalOpen}
-                    CloseAddModal={CloseModal}
+                    isModalOpen={isModalOpen}
+                    CloseModal={CloseModal}
             >
                 {isProductFormOpen && <ProductForm />}
                 {isCompanyFormOpen && <CompanyForm />}
                 {isProductsGridOpen && <ProductsGrid />}
-            </AddModal>
+            </Modaal>
         </div>
     );
 };
