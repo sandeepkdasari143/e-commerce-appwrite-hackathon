@@ -9,24 +9,24 @@ const useNavConfig = () => {
         {
             navTitle: "Dashboard",
             navIcon: DashboardRoundedIcon,
-            href: "/admin/dashboard"
+            href: "/seller/dashboard"
         },
         {
             navTitle: "stock",
             navIcon: Inventory2RoundedIcon,
-            href: "/admin/stock"
+            href: "/seller/stock"
         },{
             navTitle: "orders",
             navIcon: ShoppingCartCheckoutRoundedIcon,
-            href: "/admin/orders"
+            href: "/seller/orders"
         },{
             navTitle: "transactions",
             navIcon: PaidRoundedIcon,
-            href: "/admin/transactions"
+            href: "/seller/transactions"
         },{
             navTitle: "Admin Panel",
             navIcon: AdminPanelSettingsRoundedIcon,
-            href: "/admin/panel"
+            href: "/seller/panel"
         }
     ]
 

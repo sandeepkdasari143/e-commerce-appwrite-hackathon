@@ -50,8 +50,8 @@ const App = () => {
   }, [dispatch])
 
   const AdminProtectedRoute = ({children}) => {
-    const isAdmin = true;
-    if (isAdmin) {
+    const isSeller = true;
+    if (isSeller) {
       return children
     }
     return <Navigate to="/" />
@@ -67,11 +67,11 @@ const App = () => {
             <Route path="/" element={<HomeLayout />}>
               <Route index element={<Home />} />
             </Route>
-            <Route path="/admin/dashboard" element={<AdminProtectedRoute><DashboardHome /></AdminProtectedRoute>} />
-            <Route path="/admin/stock" element={<AdminProtectedRoute><Stock /></AdminProtectedRoute>} />
-            <Route path="/admin/orders" element={<AdminProtectedRoute><Orders /></AdminProtectedRoute>} />
-            <Route path="/admin/transactions" element={<AdminProtectedRoute><Transactions /></AdminProtectedRoute>} />
-            <Route path="/admin/panel" element={<AdminProtectedRoute><AdminPanel /></AdminProtectedRoute>} />
+            <Route path="/seller/dashboard" element={<AdminProtectedRoute><DashboardHome /></AdminProtectedRoute>} />
+            <Route path="/seller/stock" element={<AdminProtectedRoute><Stock /></AdminProtectedRoute>} />
+            <Route path="/seller/orders" element={<AdminProtectedRoute><Orders /></AdminProtectedRoute>} />
+            <Route path="/seller/transactions" element={<AdminProtectedRoute><Transactions /></AdminProtectedRoute>} />
+            <Route path="/seller/panel" element={<AdminProtectedRoute><AdminPanel /></AdminProtectedRoute>} />
           </Routes>
         </ThemeProvider>
       }

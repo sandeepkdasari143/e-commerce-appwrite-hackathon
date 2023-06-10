@@ -4,9 +4,9 @@ const Modaal = ({ children, modalTitle, isModalOpen, CloseModal }) => {
     return (
         <Modal open={isModalOpen} onclose={CloseModal}>
             <div className={styles.modalContainer}>
-                <header className="flex justify-between items-center p-3">
+                <header className="flex justify-between items-center p-2">
                     <h1 className="dark:text-white text-gray-700 text-2xl font-semibold">{modalTitle}</h1>
-                    <IconButton onClick={CloseModal}><CancelRoundedIcon className="text-3xl text-red-500"/></IconButton>
+                    <IconButton onClick={CloseModal}><CancelRoundedIcon className="text-xl text-red-500"/></IconButton>
                 </header>
                 {children}
             </div>

@@ -35,3 +35,9 @@ export const PACKAGES_ID = VITE_PACKAGES_COLLECTION_ID;
 
 export const ADD_TO_CART_FUNCTION_ID = VITE_ADD_TO_CART_FUNCTION_ID;
 export const REMOVE_FROM_CART_FUNCTION_ID = VITE_REMOVE_FROM_CART_FUNCTION_ID;
+
+
+export const HOME_URL = `http://localhost:5173/`;
+export const LOGIN_URL = `http://localhost:5173/login`;
+export const SELLER_URL = `http://localhost:5173/seller/stock`;
+export const ADMIN_URL = `http://localhost:5173/admin/dashboard`;

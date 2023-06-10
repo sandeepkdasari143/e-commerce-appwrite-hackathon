@@ -1,6 +1,6 @@
 import DashboardHeader from "../../components/DashboardHeader";
 import DashboardSidebar from "../../components/DashboardSidebar";
-import Modaal from "../../../components/ui-components/Modal";
+import Modaal from "../../../components/ui-components/Modaal";
 import ProductForm from "./ProductForm";
 import StockHeader from "./StockHeader";
 import { useDispatch, useSelector } from "react-redux";

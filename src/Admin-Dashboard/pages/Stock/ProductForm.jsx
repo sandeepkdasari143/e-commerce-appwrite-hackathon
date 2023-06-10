@@ -219,7 +219,7 @@ const ProductForm = () => {
                 </div>
                 
                 <footer className={styles.footerButtons}>
-                    <SecondaryButton>Cancel</SecondaryButton>
+                    <SecondaryButton onClick={()=>dispatch(CLOSE_MODAL())}>Cancel</SecondaryButton>
                     <AddButton type="submit">Add In Collection</AddButton>
                 </footer>
             </form>
