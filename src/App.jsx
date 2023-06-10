@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_THEME } from './redux-store/theme.slice';
-import { Routes, Route, Navigate} from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import HomeLayout from './HomeLayout';
 import Home from './pages/Home';
 
@@ -14,16 +14,19 @@ import Transactions from './Admin-Dashboard/pages/Transactions';
 import Stock from './Admin-Dashboard/pages/Stock';
 import AdminPanel from './Admin-Dashboard/pages/AdminPanel';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-
+import AuthProtectedRoute from './lib/ProtectedRoutes/AuthProtectedRoute';
+import SellerProtectedRoute from './lib/ProtectedRoutes/SellerProtectedRoute';
+// import AppWriteAuth from '../appwrite-services/auth.service';
 
 const App = () => {
 
   const mode = useSelector(state => state.theme.mode);
   const Theme = useSelector(state => state.theme.theme);
 
+  // const auth = new AppWriteAuth();
+
   const [theme, setTheme] = useState(null);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   //Setting the MUI theme Object
   React.useEffect(() => {
@@ -49,14 +52,6 @@ const App = () => {
     }
   }, [dispatch])
 
-  const AdminProtectedRoute = ({children}) => {
-    const isSeller = true;
-    if (isSeller) {
-      return children
-    }
-    return <Navigate to="/" />
-  }
-
   return (
     <>
       {theme && <ThemeProvider theme={theme}>
@@ -64,14 +59,14 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<LogIn />} />
             <Route path='/signup' element={<SignUp />} />
-            <Route path="/" element={<HomeLayout />}>
+            <Route path="/" element={<AuthProtectedRoute><HomeLayout /></AuthProtectedRoute>}>
               <Route index element={<Home />} />
             </Route>
-            <Route path="/seller/dashboard" element={<AdminProtectedRoute><DashboardHome /></AdminProtectedRoute>} />
-            <Route path="/seller/stock" element={<AdminProtectedRoute><Stock /></AdminProtectedRoute>} />
-            <Route path="/seller/orders" element={<AdminProtectedRoute><Orders /></AdminProtectedRoute>} />
-            <Route path="/seller/transactions" element={<AdminProtectedRoute><Transactions /></AdminProtectedRoute>} />
-            <Route path="/seller/panel" element={<AdminProtectedRoute><AdminPanel /></AdminProtectedRoute>} />
+            <Route path="/seller/dashboard" element={<SellerProtectedRoute><DashboardHome /></SellerProtectedRoute>} />
+            <Route path="/seller/stock" element={<SellerProtectedRoute><Stock /></SellerProtectedRoute>} />
+            <Route path="/seller/orders" element={<SellerProtectedRoute><Orders /></SellerProtectedRoute>} />
+            <Route path="/seller/transactions" element={<SellerProtectedRoute><Transactions /></SellerProtectedRoute>} />
+            <Route path="/seller/panel" element={<SellerProtectedRoute><AdminPanel /></SellerProtectedRoute>} />
           </Routes>
         </ThemeProvider>
       }

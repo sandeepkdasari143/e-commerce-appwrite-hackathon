@@ -5,22 +5,25 @@ import { HOME_URL, LOGIN_URL } from "./appWriteSecrets";
 
 class AppWriteAuth{
     auth
+    navigate
     constructor() {
         this.auth = new Account(appwriteClient);
     }
 
-    async createAccount(PAYLOAD) {
+    async signUp(PAYLOAD) {
         try {
             const { email, password, name } = PAYLOAD;
             const response = await this.auth.create(ID.unique(), email, password, name);
             console.log(response);
         } catch (error) {
-            console.log("ERROR in createAcc():: ", error.response)
-            toast.error(error.message);
+            const errorResponse = error.response;
+            if (errorResponse?.type === "user_already_exists") {
+                toast.error("Email already exists, Kindly LogIn :)")
+            }
         }
     }
 
-    async creatSession(PAYLOAD) {
+    async signIn(PAYLOAD) {
         try {
             const { email, password} = PAYLOAD;
             const response = await this.auth.createEmailSession(email, password);
@@ -41,25 +44,23 @@ class AppWriteAuth{
         }
     }
 
-    async creatMagicSessionForNewUser(PAYLOAD) {
+    async createMagicSession(PAYLOAD) {
         try {
             const {email, URL } = PAYLOAD;
             const response = await this.auth.createMagicURLSession(ID.unique(), email, URL);
             console.log(response);
         } catch (error) {
-            console.log("ERROR in creatMagicSession():: ", error.response)
-            toast.error(error.message);
+            const errorResponse = error.response;
+            if(errorResponse?.type === "user_already_exists")
+            toast.error("Email already exists, Kindly LogIn :)");
         }
     }
 
     async createJWT() {
-        try {
-            const response = await this.auth.createJWT();
-            console.log(response)
-        } catch (error) {
-            console.log("ERROR in createJWT():: ", error.response)
-            toast.error(error.message);
-        }
+        const response = await this.auth.createJWT();
+        // console.log(response)
+        return response;
+        
     }
 
     async logOut() {
@@ -73,3 +74,5 @@ class AppWriteAuth{
     }
 
 }
+
+export default AppWriteAuth;

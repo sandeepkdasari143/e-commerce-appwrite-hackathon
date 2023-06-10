@@ -2,10 +2,14 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import { useState } from 'react';
 import AddButton from '../../components/buttons/AddButton';
 import { Link } from 'react-router-dom';
+import AppWriteAuth from '../../../appwrite-services/auth.service';
+import { HOME_URL } from '../../../appwrite-services/appWriteSecrets';
 
 const SignUp = () => {
+    const auth = new AppWriteAuth();
+
     const [signUpInfo, setSignUpInfo] = useState({
-        username: "",
+        name: "",
         email: "",
         password: ""
     })
@@ -14,6 +18,17 @@ const SignUp = () => {
         const { name, value } = e.target;
         setSignUpInfo({ ...signUpInfo, [name]: value });
     }
+
+    const signUpTheUser = async(event) => {
+        event.preventDefault();
+        // const PAYLOAD = {
+        //     email: signUpInfo.email,
+        //     URL: HOME_URL
+        // }
+        const response = await auth.signUp(signUpInfo)
+        return response
+    }
+
     return (
         <main className='text-white relative h-[100vh] w-[100vw] flex flex-col'>
             <section className="rounded-xl p-3 bg-white dark:bg-gray-900 border border-pink-800 dark:border-gray-700 flex flex-col w-[400px] absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
@@ -29,23 +44,22 @@ const SignUp = () => {
                         </Link>
                     </span>
                 </h1>
-                <form>
+                <form onSubmit={signUpTheUser}>
                     <div className={styles.form}>
                         <div className={styles.textField}>
-                            <label className={styles.label} htmlFor="username">UseName</label>
+                            <label className={styles.label} htmlFor="name">UseName</label>
                             <input className={styles.inputField}
-                                id="username"
-                                name="username"
-                                placeholder='Enter your username'
+                                id="name"
+                                name="name"
+                                placeholder='Enter your name'
                                 onChange={handleInputChange}
                                 maxLength={30}
                                 required
-                                value={signUpInfo.username}
-                                type="username"
-                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" />
+                                value={signUpInfo.name}
+                                type="name" />
                             <p className={styles.helperMessage}>
                                 <HelpRoundedIcon className={styles.helpIcon}/>
-                                <span>Please Enter your username...</span>
+                                <span>Please Enter your name...</span>
                             </p>
                         </div>
                         <div className={styles.textField}>
@@ -58,8 +72,7 @@ const SignUp = () => {
                                 maxLength={30}
                                 required
                                 value={signUpInfo.email}
-                                type="email"
-                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" />
+                                type="email"/>
                             <p className={styles.helperMessage}>
                                 <HelpRoundedIcon className={styles.helpIcon}/>
                                 <span>Please Enter your valid Email address...</span>
@@ -75,8 +88,7 @@ const SignUp = () => {
                                 maxLength={30}
                                 required
                                 value={signUpInfo.password}
-                                type="password"
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()]).{8,}" />
+                                type="password" />
                             <p className={styles.helperMessage}>
                                 <HelpRoundedIcon className={styles.helpIcon}/>
                                 <span>Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and be at least 8 characters long</span>

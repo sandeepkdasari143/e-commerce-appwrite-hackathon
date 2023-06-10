@@ -2,8 +2,10 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import { useState } from 'react';
 import AddButton from '../../components/buttons/AddButton';
 import { Link } from 'react-router-dom';
+import AppWriteAuth from '../../../appwrite-services/auth.service';
 
 const LogIn = () => {
+    const auth = new AppWriteAuth();
     const [loginInfo, setLogInInfo] = useState({
         email: "",
         password: ""
@@ -12,6 +14,13 @@ const LogIn = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setLogInInfo({ ...loginInfo, [name]: value });
+    }
+
+    const logInTheUser = async(event) => {
+        event.preventDefault();
+        const sessionRes = await auth.signIn(loginInfo);
+        // await auth.logOut();
+        const JWTRes = await auth.createJWT();
     }
     return (
         <main className='relative h-[100vh] w-[100vw] flex flex-col'>
@@ -28,7 +37,7 @@ const LogIn = () => {
                         </Link>
                     </span>
                 </h1>
-                <form>
+                <form onSubmit={logInTheUser}>
                     <div className={styles.form}>
                         <div className={styles.textField}>
                             <label className={styles.label} htmlFor="email">Email</label>
@@ -40,8 +49,7 @@ const LogIn = () => {
                                 maxLength={30}
                                 required
                                 value={loginInfo.email}
-                                type="email"
-                                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" />
+                                type="email"/>
                             <p className={styles.helperMessage}>
                                 <HelpRoundedIcon className={styles.helpIcon}/>
                                 <span>Please Enter your valid Email address...</span>
@@ -57,8 +65,7 @@ const LogIn = () => {
                                 maxLength={30}
                                 required
                                 value={loginInfo.password}
-                                type="password"
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()]).{8,}" />
+                                type="password" />
                             <p className={styles.helperMessage}>
                                 <HelpRoundedIcon className={styles.helpIcon}/>
                                 <span>Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and be at least 8 characters long</span>
