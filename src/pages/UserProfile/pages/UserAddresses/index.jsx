@@ -1,10 +1,13 @@
 import UserSidebar from "../../components/UserSidebar";
+import UserAddressesGrid from "./UserAddressesGrid";
+import UserAddressesHeader from "./UserAddressesHeader";
 const UserAddresses = () => {
     return (
         <main className={styles.wrapper}>
             <UserSidebar />
             <section className={styles.contentContainer}>
-                <h1>UserAddresses</h1>
+                <UserAddressesHeader />
+                <UserAddressesGrid />
             </section>
         </main>
     )
