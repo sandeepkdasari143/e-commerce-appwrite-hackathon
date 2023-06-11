@@ -8,14 +8,19 @@ import Home from './pages/Home';
 import LogIn from './pages/Authentication/LogIn';
 import SignUp from './pages/Authentication/SignUp';
 
-import DashboardHome from './Admin-Dashboard/pages/DashboardHome';
-import Orders from './Admin-Dashboard/pages/Orders';
-import Transactions from './Admin-Dashboard/pages/Transactions';
-import Stock from './Admin-Dashboard/pages/Stock';
-import AdminPanel from './Admin-Dashboard/pages/AdminPanel';
+import DashboardHome from './Seller-Dashboard/pages/DashboardHome';
+import Orders from './Seller-Dashboard/pages/Orders';
+import Transactions from './Seller-Dashboard/pages/Transactions';
+import Stock from './Seller-Dashboard/pages/Stock';
+import AdminPanel from './Seller-Dashboard/pages/AdminPanel';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import AuthProtectedRoute from './lib/ProtectedRoutes/AuthProtectedRoute';
 import SellerProtectedRoute from './lib/ProtectedRoutes/SellerProtectedRoute';
+import UserProfile from './pages/UserProfile/pages/UserProfile';
+import UserOrders from './pages/UserProfile/pages/UserOrders';
+import UserTransactions from './pages/UserProfile/pages/UserTransactions';
+import UserAddresses from './pages/UserProfile/pages/UserAddresses';
+
 // import AppWriteAuth from '../appwrite-services/auth.service';
 
 const App = () => {
@@ -27,6 +32,7 @@ const App = () => {
 
   const [theme, setTheme] = useState(null);
   const dispatch = useDispatch();
+  
 
   //Setting the MUI theme Object
   React.useEffect(() => {
@@ -61,6 +67,10 @@ const App = () => {
             <Route path='/signup' element={<SignUp />} />
             <Route path="/" element={<AuthProtectedRoute><HomeLayout /></AuthProtectedRoute>}>
               <Route index element={<Home />} />
+              <Route path={`/user/:userID/profile`} element={<UserProfile />} />
+              <Route path={`/user/:userID/orders`} element={<UserOrders />} />
+              <Route path={`/user/:userID/transactions`} element={<UserTransactions />} />
+              <Route path={`/user/:userID/addresses`} element={<UserAddresses />} />
             </Route>
             <Route path="/seller/dashboard" element={<SellerProtectedRoute><DashboardHome /></SellerProtectedRoute>} />
             <Route path="/seller/stock" element={<SellerProtectedRoute><Stock /></SellerProtectedRoute>} />
