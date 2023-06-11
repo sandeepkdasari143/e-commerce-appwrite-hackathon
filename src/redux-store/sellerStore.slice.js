@@ -5,7 +5,7 @@ export const initialState = {
     products: [],
 }
 
-const adminStoreSlice = createSlice({
+const sellerStoreSlice = createSlice({
     name: "adminStore",
     initialState,
     reducers: {
@@ -37,6 +37,6 @@ const adminStoreSlice = createSlice({
 })
 
 
-export const { SET_COLLECTIONS, ADD_COLLECTION, SET_PRODUCTS, ADD_PRODUCT} = adminStoreSlice.actions;
+export const { SET_COLLECTIONS, ADD_COLLECTION, SET_PRODUCTS, ADD_PRODUCT} = sellerStoreSlice.actions;
 
-export default adminStoreSlice.reducer;
+export default sellerStoreSlice.reducer;

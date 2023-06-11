@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./theme.slice";
 import modalReducer from "./modal.slice";
-import adminStoreReducer from "./adminStore.slice";
+import adminStoreReducer from "./sellerStore.slice";
 import authReducer from "./auth.slice";
 
 export const store = configureStore({

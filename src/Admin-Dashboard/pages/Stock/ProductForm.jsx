@@ -6,7 +6,7 @@ import {
     OPEN_PRODUCTS_GRID
 } from "../../../redux-store/modal.slice";
 import { usePOSTFetch } from '../../hooks/usePOSTFetch';
-import { ADD_PRODUCT } from "../../../redux-store/adminStore.slice";
+import { ADD_PRODUCT } from "../../../redux-store/sellerStore.slice";
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import AddButton from "../../../components/buttons/AddButton";

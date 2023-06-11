@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import CompanyCard from './CompanyCard'
-import { SET_COLLECTIONS } from "../../../redux-store/adminStore.slice";
+import { SET_COLLECTIONS } from "../../../redux-store/sellerStore.slice";
 
 const CompanyGrid = () => {
     const dispatch = useDispatch();

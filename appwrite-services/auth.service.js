@@ -63,14 +63,15 @@ class AppWriteAuth{
         
     }
 
+    async getUser() {
+        const response = await this.auth.get();
+        console.log(response);
+        return response;
+    }
+
     async logOut() {
-        try {
-            const response = await this.auth.deleteSession('current');
-            console.log(response)
-        } catch (error) {
-            console.log("ERROR in createJWT():: ", error.response)
-            toast.error(error.message);
-        }
+        const response = await this.auth.deleteSession('current');
+        console.log(response)
     }
 
 }

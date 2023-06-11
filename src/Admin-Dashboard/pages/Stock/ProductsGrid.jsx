@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { SET_PRODUCTS } from '../../../redux-store/adminStore.slice';
+import { SET_PRODUCTS } from '../../../redux-store/sellerStore.slice';
 import ProductCard from './ProductCard';
 
 const ProductsGrid = () => {

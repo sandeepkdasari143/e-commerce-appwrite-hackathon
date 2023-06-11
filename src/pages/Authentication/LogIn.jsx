@@ -1,11 +1,13 @@
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import { useState } from 'react';
 import AddButton from '../../components/buttons/AddButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppWriteAuth from '../../../appwrite-services/auth.service';
+import { toast } from 'react-toastify';
 
 const LogIn = () => {
     const auth = new AppWriteAuth();
+    const navigate = useNavigate();
     const [loginInfo, setLogInInfo] = useState({
         email: "",
         password: ""
@@ -19,8 +21,17 @@ const LogIn = () => {
     const logInTheUser = async(event) => {
         event.preventDefault();
         const sessionRes = await auth.signIn(loginInfo);
-        // await auth.logOut();
-        const JWTRes = await auth.createJWT();
+        try {
+            const user = await auth.getUser();
+            if (user) {
+                navigate('/', { replace: true });
+                toast.success("You have Logged In Successfully 😇")
+            }
+        } catch (error) {
+            if (error.response)
+                toast.error("Please LogIn with valid credentials 😥");
+            navigate('/login', {replace: true});
+        }
     }
     return (
         <main className='relative h-[100vh] w-[100vw] flex flex-col'>

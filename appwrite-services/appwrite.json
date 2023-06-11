@@ -47,6 +47,55 @@
             "events": [],
             "schedule": "",
             "timeout": 240
+        },
+        {
+            "$id": "64848637b48c391b5fe9",
+            "name": "verifySellerEmail",
+            "runtime": "node-16.0",
+            "path": "functions/verifySellerEmail",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "users"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 240
+        },
+        {
+            "$id": "6484aa715f4797678b8b",
+            "name": "addMemberToSellersTeam",
+            "runtime": "node-16.0",
+            "path": "functions/addMemberToSellersTeam",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "users"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 240
+        },
+        {
+            "$id": "6484bda7990cf42671a4",
+            "name": "createOrder",
+            "runtime": "node-16.0",
+            "path": "functions/createOrder",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }

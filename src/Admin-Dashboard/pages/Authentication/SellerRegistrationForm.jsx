@@ -1,23 +1,31 @@
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import RegisterSeller from "../../../components/buttons/AddButton";
 import SecondaryButton from "../../../components/buttons/SecondaryButton";
 import { CLOSE_MODAL, OPEN_MODAL, OPEN_SELLER_LOGIN_FORM } from "../../../redux-store/modal.slice";
 import TextField from "../../../components/ui-components/TextField";
 import { useState } from "react";
 import ImageUpload from "../../../components/ui-components/ImageUpload";
+import AppWriteFunction from "../../../../appwrite-services/functions.service";
+import { ADD_SELLER_TO_TEAM_FUNCTION_ID } from "../../../../appwrite-services/appWriteSecrets";
+
 
 const SellerRegistrationForm = () => {
+
   const dispatch = useDispatch();
+  const userEmail = useSelector(store => store.auth.user?.email);
+
   const [newSeller, setNewSeller] = useState({
-    sellerEmail: "sandeepkumar@gmail.com",
+    sellerEmail: userEmail,
     sellerName: "",
     sellerDescription: "",
-    sellerLogo: {}
+    // sellerLogo: {}
   });
+
   const handleTextFieldChange = (e) => {
     const { name, value } = e.target;
     setNewSeller({ ...newSeller, [name]: value });
   }
+
   const [companyLogoPreview, setCompanyLogoPreview] = useState("");
     const imageUploadEvent = (e) => {
       const logo = e.target.files[0];
@@ -31,8 +39,14 @@ const SellerRegistrationForm = () => {
     dispatch(OPEN_MODAL());
   }
 
+  const registerSeller = async(event) => {
+    event.preventDefault();
+    const funct = new AppWriteFunction();
+    const response = await funct.ExecuteFunc(ADD_SELLER_TO_TEAM_FUNCTION_ID, JSON.stringify(newSeller))
+  }
+
   return (
-    <form onSubmit>
+    <form onSubmit={registerSeller}>
       <h1 className="px-3">Already have Seller Account?
         <span onClick={openSellerLogInForm}
           className="text-fuchsia-500 font-bold cursor-pointer ml-2 hover:underline">
@@ -43,7 +57,7 @@ const SellerRegistrationForm = () => {
         <TextField name="sellerEmail" value={newSeller.sellerEmail} label={"Seller Email"} readOnly={true} helperText={"To Change the Email, LogIn back with your business email."}/>
         <TextField name="sellerName" onChange={handleTextFieldChange} value={newSeller.sellerName} label={"Seller Name"} helperText="Please Enter Seller Name in 50 Characters" maxLength={50}/>
         <TextField name="sellerDescription" onChange={handleTextFieldChange} value={newSeller.sellerDescription} label={"Seller Description"} helperText="Please Enter Seller Description in 500 Characters" maxLength={500} rows={4} />
-        <ImageUpload onUpload={imageUploadEvent} preview={companyLogoPreview} name="sellerLogo" helperText={"Please Upload Seller Logo"}/>
+        {/* <ImageUpload onUpload={imageUploadEvent} preview={companyLogoPreview} name="sellerLogo" helperText={"Please Upload Seller Logo"}/> */}
       </div>
       <footer className={styles.footerButtons}>
         <SecondaryButton onClick={() => dispatch(CLOSE_MODAL())}>
