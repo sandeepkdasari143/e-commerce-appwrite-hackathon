@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import DashboardHeader from "../../components/DashboardHeader";
-import DashboardSidebar from "../../components/DashboardSidebar";
 import OrdersHeader from "./OrdersHeader";
+import OrdersSidebar from "./OrdersSidebar";
 const Orders = () => {
   return (
     <div className="transition-all duration-200 linear lg:h-[100vh] w-[100vw] dark:bg-[rgb(20,20,31)] bg-pink-50">
       <DashboardHeader />
       <main className={styles.ordersWrapper}>
-        <DashboardSidebar />
+        <OrdersSidebar />
         <section className={styles.ordersContent}>
           <OrdersHeader />
           <div>
@@ -19,8 +19,8 @@ const Orders = () => {
   );
 };
 const styles = {
-  ordersWrapper: "flex flex-col md:flex-row",
+  ordersWrapper: "relative flex flex-col md:flex-row",
   ordersContent:
-    "relative transition-all duration-200 linear h-full md:h-[92vh] md:w-[70%] lg:w-[85%] w-[100vw] dark:bg-[rgb(20,20,31)] bg-[#FDF4FF]",
+    "absolute inset-0 transition-all duration-200 linear h-full md:h-[92vh] md:w-[70%] lg:w-[100%] w-[100vw] dark:bg-[rgb(20,20,31)] bg-[#FDF4FF]",
 };
 export default Orders;

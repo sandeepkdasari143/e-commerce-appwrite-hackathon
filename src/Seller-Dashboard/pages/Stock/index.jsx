@@ -8,6 +8,7 @@ import { CLOSE_MODAL } from "../../../redux-store/modal.slice";
 import CompanyForm from "./CompanyForm";
 import ProductsGrid from "./ProductsGrid";
 import CompanyGrid from "./CompanyGrid";
+import FeatureTemplates from "./FeatureTemplates";
 
 const Stock = () => {
 
@@ -22,7 +23,10 @@ const Stock = () => {
                 <DashboardSidebar />
                 <section className={styles.productsContent}>
                     <StockHeader />
-                    <CompanyGrid />
+                    <div className="h-[80%] flex gap-3 flex-col md:flex-row items-center justify-between w-[100%] p-3">
+                        <FeatureTemplates />
+                        <CompanyGrid />
+                    </div>
                 </section>
             </main>
 

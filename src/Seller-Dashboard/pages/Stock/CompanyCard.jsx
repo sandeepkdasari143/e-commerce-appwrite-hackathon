@@ -6,16 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { OPEN_MODAL, OPEN_PRODUCT_FORM, OPEN_PRODUCTS_GRID } from "../../../redux-store/modal.slice";
 
-const CompanyCard = ({_id, collectionName, collectionDescription, collectionLogo}) => {
+const CompanyCard = ({$id, collectionName, collectionDescription, collectionLogo}) => {
     const dispatch = useDispatch();
     const displayAllProducts = () => {
-        navigate(`/admin/stock?collectionID=${_id}`);
+        navigate(`/admin/stock?collectionID=${$id}`);
         dispatch(OPEN_PRODUCTS_GRID());
         return dispatch(OPEN_MODAL())
     }
     
     const openCompanyForm = () => {
-        navigate(`/admin/stock?collectionID=${_id}`);
+        navigate(`/admin/stock?collectionID=${$id}`);
         dispatch(OPEN_PRODUCT_FORM());
         return dispatch(OPEN_MODAL())
     }
@@ -24,7 +24,7 @@ const CompanyCard = ({_id, collectionName, collectionDescription, collectionLogo
         <article className={styles.companyCard}>
             <div className={styles.companyDetailsWrapper}>
                 <div className={styles.companyDetails}>
-                    <img className={styles.companyImage} src={collectionLogo?.secureURL} alt="" />
+                    <img className={styles.companyImage} src={collectionLogo[0]} alt="" />
                     <div className="flex flex-col items-start gap-1 p-1">
                         <h1 className={styles.companyTitle}>{collectionName}</h1>
                         <p className={styles.companyDesc}>{collectionDescription}</p>

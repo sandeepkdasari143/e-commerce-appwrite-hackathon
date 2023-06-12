@@ -1,5 +1,5 @@
 import { appwriteClient } from ".";
-import { Databases, ID} from 'appwrite';
+import { Databases, ID, Query} from 'appwrite';
 import { toast } from 'react-toastify';
 
 class AppWriteDB {
@@ -55,6 +55,18 @@ class AppWriteDB {
     async deleteDoc(DB_ID, COLLECTION_ID, DOC_ID, PAYLOAD) {
         try {
             const response = await this.db.deleteDocument(DB_ID, COLLECTION_ID, DOC_ID, PAYLOAD);
+            console.log(response)
+            return response;
+        } catch (error) {
+            console.log("ERROR in deleteDoc():: ", error.response)
+            toast.error(error.message);
+        }
+    }
+
+    async getDocsByEqualQuery(DB_ID, COLLECTION_ID, PAYLOAD) {
+        try {
+            const {key, value} = PAYLOAD;
+            const response = await this.db.deleteDocument(DB_ID, COLLECTION_ID, [Query.equal(key, value)]);
             console.log(response)
             return response;
         } catch (error) {

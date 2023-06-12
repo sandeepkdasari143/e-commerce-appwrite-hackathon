@@ -10,7 +10,7 @@ const AdminPanel = () => {
             <main className={styles.panelWrapper}>
                 <DashboardSidebar />
                 <section className={styles.panelContent}>
-                
+                    
                 </section>
             </main>
         </div>

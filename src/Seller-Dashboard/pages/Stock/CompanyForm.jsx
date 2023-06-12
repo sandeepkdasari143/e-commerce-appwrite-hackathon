@@ -4,10 +4,16 @@ import AddButton from '../../../components/buttons/AddButton';
 import { useDispatch } from 'react-redux';
 import { CLOSE_MODAL } from '../../../redux-store/modal.slice';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import AppWriteDB from '../../../../appwrite-services/database.service';
+import AppWriteStorage from '../../../../appwrite-services/storage.service';
+import { ECOMM_DB_ID } from '../../../../appwrite-services/appWriteSecrets';
+import { ADD_COLLECTION } from '../../../redux-store/sellerStore.slice';
 
 const CompanyForm = () => {
     const dispatch = useDispatch();
-    
+    const db = new AppWriteDB();
+    const storage = new AppWriteStorage();
+
     const [newCollection, setNewCollection] = React.useState({
         collectionName: "",
         collectionDescription: "",
@@ -16,8 +22,19 @@ const CompanyForm = () => {
 
     const createCollection = async(event) => {
         event.preventDefault();
-        // dispatch(ADD_COLLECTION());
-        dispatch(CLOSE_MODAL())
+        const fileUploadResponse = await storage.uploadFile(`collectionLogo`, newCollection.collectionLogo);
+        if (fileUploadResponse) {
+            const PAYLOAD = {
+                collectionName:newCollection.collectionName,
+                collectionDescription: newCollection.collectionDescription,
+                collectionLogo: fileUploadResponse
+            };
+            const newCollectionData = await db.createDoc(ECOMM_DB_ID, '6483fcc139bfc48895c7', PAYLOAD);
+            if (newCollectionData) {
+                dispatch(ADD_COLLECTION(newCollectionData));
+                dispatch(CLOSE_MODAL())
+            }
+        }
     }
 
     const handleInputChange = (e) => {
