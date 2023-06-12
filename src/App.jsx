@@ -20,6 +20,9 @@ import UserProfile from './pages/UserProfile/pages/UserProfile';
 import UserOrders from './pages/UserProfile/pages/UserOrders';
 import UserTransactions from './pages/UserProfile/pages/UserTransactions';
 import UserAddresses from './pages/UserProfile/pages/UserAddresses';
+import OrdersFallbackUI from './Seller-Dashboard/pages/Orders/pages/OrdersFallbackUI';
+import OrdersMapView from './Seller-Dashboard/pages/Orders/pages/OrdersMapView';
+import OrdersGridView from './Seller-Dashboard/pages/Orders/pages/OrdersGridView';
 
 // import AppWriteAuth from '../appwrite-services/auth.service';
 
@@ -71,10 +74,16 @@ const App = () => {
               <Route path={`/user/:userID/orders`} element={<UserOrders />} />
               <Route path={`/user/:userID/transactions`} element={<UserTransactions />} />
               <Route path={`/user/:userID/addresses`} element={<UserAddresses />} />
-            </Route>
+          </Route>
+          
             <Route path="/seller/dashboard" element={<SellerProtectedRoute><DashboardHome /></SellerProtectedRoute>} />
             <Route path="/seller/stock" element={<SellerProtectedRoute><Stock /></SellerProtectedRoute>} />
-            <Route path="/seller/orders" element={<SellerProtectedRoute><Orders /></SellerProtectedRoute>} />
+            
+            <Route path="/seller/orders" element={<SellerProtectedRoute><Orders /></SellerProtectedRoute>} >
+              <Route index element={<SellerProtectedRoute><OrdersFallbackUI /></SellerProtectedRoute>} />
+              <Route path="/seller/orders/mapView" element={<SellerProtectedRoute><OrdersMapView /></SellerProtectedRoute>} />
+            <Route path="/seller/orders/gridView" element={<SellerProtectedRoute><OrdersGridView /></SellerProtectedRoute>} />
+            </Route>
             <Route path="/seller/transactions" element={<SellerProtectedRoute><Transactions /></SellerProtectedRoute>} />
             <Route path="/seller/panel" element={<SellerProtectedRoute><AdminPanel /></SellerProtectedRoute>} />
           </Routes>

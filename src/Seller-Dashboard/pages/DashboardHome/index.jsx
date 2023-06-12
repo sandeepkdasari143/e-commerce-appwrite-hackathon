@@ -1,4 +1,4 @@
-
+import { Outlet } from 'react-router-dom'
 import DashboardHeader from '../../components/DashboardHeader'
 import DashboardSidebar from '../../components/DashboardSidebar'
 
@@ -10,7 +10,7 @@ const DashboardHome = () => {
             <main className={styles.dashboardWrapper}>
                 <DashboardSidebar />
                 <section className={styles.dashboardContent}>
-                
+                    <Outlet />
                 </section>
             </main>
         </div>

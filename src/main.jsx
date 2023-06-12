@@ -10,7 +10,7 @@ import { StyledEngineProvider } from '@mui/material'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import 'mapbox-gl/dist/mapbox-gl.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StyledEngineProvider injectFirst>
     <Provider store={store}>
