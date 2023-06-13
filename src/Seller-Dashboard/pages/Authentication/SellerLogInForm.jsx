@@ -49,7 +49,6 @@ const SellerLogInForm = () => {
           onChange={handleTextFieldChange}
           value={newSeller.sellerEmail}
           label={"Seller Email"}
-          pattern={"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}"}
           helperText={"Enter You valid Email."}
         />
         <TextField
@@ -57,7 +56,6 @@ const SellerLogInForm = () => {
           onChange={handleTextFieldChange}
           value={newSeller.sellerPassword}
           label={"Seller Password"}
-          pattern={"(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()]).{8,}"}
           helperText="Please Enter Seller Password."
         />
       </div>

@@ -25,8 +25,8 @@ class AppWriteTeams {
             console.log(response)
             return response;
         } catch (error) {
-            console.log("ERROR in getAllDocs():: ", error.response)
-            toast.error(error.message);
+            // console.log("ERROR in getAllDocs():: ", error.response)
+            // toast.error(error.message);
         }
     }
 

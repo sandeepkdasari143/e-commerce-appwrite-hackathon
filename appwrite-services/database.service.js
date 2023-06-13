@@ -66,11 +66,11 @@ class AppWriteDB {
     async getDocsByEqualQuery(DB_ID, COLLECTION_ID, PAYLOAD) {
         try {
             const {key, value} = PAYLOAD;
-            const response = await this.db.deleteDocument(DB_ID, COLLECTION_ID, [Query.equal(key, value)]);
+            const response = await this.db.listDocuments(DB_ID, COLLECTION_ID, [Query.equal(key, value)]);
             console.log(response)
-            return response;
+            return response.documents;
         } catch (error) {
-            console.log("ERROR in deleteDoc():: ", error.response)
+            console.log("ERROR in getDocsByEqualQuery():: ", error.response)
             toast.error(error.message);
         }
     }

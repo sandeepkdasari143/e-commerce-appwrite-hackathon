@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
     jwtToken: "",
-    currentUser: null
+    currentUser: null,
+    isSeller: false,
+    currentSeller: null
 }
 
 export const authSlice = createSlice({
@@ -17,10 +19,16 @@ export const authSlice = createSlice({
         },
         LOG_OUT: (state) => {
             state.currentUser = null;
+        },
+        SET_SELLER_DETAILS: (state, action) => {
+            state.currentSeller = action.payload;
+        },
+        SET_IS_SELLER: (state, action) => {
+            state.isSeller = action.payload;
         }
     }
 })
 
-export const {SET_JWT_TOKEN, SET_USER_DETAILS, LOG_OUT} = authSlice.actions;
+export const {SET_JWT_TOKEN, SET_USER_DETAILS, LOG_OUT, SET_SELLER_DETAILS, SET_IS_SELLER} = authSlice.actions;
 
 export default authSlice.reducer;

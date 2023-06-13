@@ -1,4 +1,3 @@
-
 import { Outlet } from "react-router-dom";
 import Header from "./components/ui-components/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,11 +5,12 @@ import Modaal from "./components/ui-components/Modaal";
 import { CLOSE_MODAL } from "./redux-store/modal.slice";
 import SellerRegistrationForm from "./Seller-Dashboard/pages/Authentication/SellerRegistrationForm";
 import SellerLogInForm from "./Seller-Dashboard/pages/Authentication/SellerLogInForm";
+import EmailVerificationNotification from "./components/ui-components/EmailVerificationNotification";
 
 
 const HomeLayout = () => {
   const dispatch = useDispatch();
-  const {modalTitle, isModalOpen, isSellerRegistrationFormOpen, isSellerLogInFormOpen} = useSelector(state => state.modal);
+  const {modalTitle, isModalOpen, isSellerRegistrationFormOpen, isSellerLogInFormOpen, isEmailVerificationNotificationOpen} = useSelector(state => state.modal);
   const CloseModal = () => dispatch(CLOSE_MODAL());
 
   return (
@@ -27,7 +27,8 @@ const HomeLayout = () => {
         CloseModal={CloseModal}
             >
               {isSellerRegistrationFormOpen && <SellerRegistrationForm />}
-              {isSellerLogInFormOpen && <SellerLogInForm />}
+        {isSellerLogInFormOpen && <SellerLogInForm />}
+        {isEmailVerificationNotificationOpen && <EmailVerificationNotification />}
       </Modaal>
     </div>
   );

@@ -6,8 +6,10 @@ import AppWriteAuth from '../../../appwrite-services/auth.service';
 import { toast } from 'react-toastify';
 
 const LogIn = () => {
+
     const auth = new AppWriteAuth();
     const navigate = useNavigate();
+
     const [loginInfo, setLogInInfo] = useState({
         email: "",
         password: ""
@@ -20,19 +22,22 @@ const LogIn = () => {
 
     const logInTheUser = async(event) => {
         event.preventDefault();
-        const sessionRes = await auth.signIn(loginInfo);
-        try {
-            const user = await auth.getUser();
-            if (user) {
-                navigate('/', { replace: true });
-                toast.success("You have Logged In Successfully 😇")
+        const sessionResponse = await auth.signIn(loginInfo);
+        if (sessionResponse) {
+            try {
+                const user = await auth.getUser();
+                if (user) {
+                    navigate('/', { replace: true });
+                    toast.success("You have Logged In Successfully 😇")
+                }
+            } catch (error) {
+                if (error.response)
+                    toast.error("Please LogIn with valid credentials 😥");
+                navigate('/login', {replace: true});
             }
-        } catch (error) {
-            if (error.response)
-                toast.error("Please LogIn with valid credentials 😥");
-            navigate('/login', {replace: true});
         }
     }
+    
     return (
         <main className='relative h-[100vh] w-[100vw] flex flex-col'>
             <section className="rounded-xl p-3 dark:bg-gray-900 border dark:border-gray-700 flex flex-col w-[400px] absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">

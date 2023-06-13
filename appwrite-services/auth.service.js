@@ -27,7 +27,8 @@ class AppWriteAuth{
         try {
             const { email, password} = PAYLOAD;
             const response = await this.auth.createEmailSession(email, password);
-            console.log(response);
+            // console.log(response);
+            return response;
         } catch (error) {
             console.log("ERROR in creatSession():: ", error.response)
             toast.error(error.message);
@@ -71,7 +72,14 @@ class AppWriteAuth{
 
     async logOut() {
         const response = await this.auth.deleteSession('current');
-        console.log(response)
+        console.log(response);
+        return response;
+    }
+
+    async verifyEmail(URL) {
+        const response = await this.auth.createVerification(URL);
+        console.log(response);
+        return response;
     }
 
 }

@@ -9,6 +9,8 @@ export const initialState = {
 
     isSellerRegistrationFormOpen: false,
     isSellerLogInFormOpen: false,
+
+    isEmailVerificationNotificationOpen: false,
 }
 
 export const modalSlice = createSlice({
@@ -73,9 +75,21 @@ export const modalSlice = createSlice({
             state.isSellerLogInFormOpen = true;
             return;
         },
+
+        OPEN_EMIAL_VERIFICATION_NOTIFICATION: (state) => {
+            state.modalTitle = `You have a Notification!`;
+            state.isCompanyFormOpen = false;
+            state.isProductFormOpen = false;
+            state.isProductsGridOpen = false;
+            state.isSellerRegistrationFormOpen = false;
+            state.isSellerLogInFormOpen = false;
+
+            state.isEmailVerificationNotificationOpen = true;
+            return;
+        }
     }
 });
 
-export const {CLOSE_MODAL, OPEN_MODAL, SET_MODAL_TITLE, OPEN_PRODUCT_FORM, OPEN_COLLECTION_FORM, OPEN_PRODUCTS_GRID, OPEN_SELLER_REGISTRATION_FORM, OPEN_SELLER_LOGIN_FORM} = modalSlice.actions;
+export const {CLOSE_MODAL, OPEN_MODAL,OPEN_EMIAL_VERIFICATION_NOTIFICATION, SET_MODAL_TITLE, OPEN_PRODUCT_FORM, OPEN_COLLECTION_FORM, OPEN_PRODUCTS_GRID, OPEN_SELLER_REGISTRATION_FORM, OPEN_SELLER_LOGIN_FORM} = modalSlice.actions;
 
 export default modalSlice.reducer;

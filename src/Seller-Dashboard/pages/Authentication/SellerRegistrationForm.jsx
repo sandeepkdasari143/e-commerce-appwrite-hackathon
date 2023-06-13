@@ -7,10 +7,12 @@ import { useState } from "react";
 import ImageUpload from "../../../components/ui-components/ImageUpload";
 import AppWriteFunction from "../../../../appwrite-services/functions.service";
 import { ADD_SELLER_TO_TEAM_FUNCTION_ID } from "../../../../appwrite-services/appWriteSecrets";
+import { useNavigate } from "react-router-dom";
 
 
 const SellerRegistrationForm = () => {
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userEmail = useSelector(store => store.auth.user?.email);
 
@@ -42,7 +44,11 @@ const SellerRegistrationForm = () => {
   const registerSeller = async(event) => {
     event.preventDefault();
     const funct = new AppWriteFunction();
-    const response = await funct.ExecuteFunc(ADD_SELLER_TO_TEAM_FUNCTION_ID, JSON.stringify(newSeller))
+    const response = await funct.ExecuteFunc(ADD_SELLER_TO_TEAM_FUNCTION_ID, JSON.stringify(newSeller));
+
+    if (response) {
+      
+    }
   }
 
   return (
