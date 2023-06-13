@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom";
-import AuthProtectedRoute from "./AuthProtectedRoute";
+import { useSelector } from "react-redux";
 
-const SellerProtectedRoute = ({children}) => {
-    const isSeller = true;
+const SellerProtectedRoute = ({ children }) => {
+    const {isSeller} = useSelector(store => store.auth);
     if (isSeller) {
-        return <AuthProtectedRoute>{children}</AuthProtectedRoute>
+        return children
     }
     return <Navigate to="/" />
 }
