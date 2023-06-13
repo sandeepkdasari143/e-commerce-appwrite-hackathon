@@ -24,7 +24,7 @@ const CompanyCard = ({$id, collectionName, collectionDescription, collectionLogo
         <article className={styles.companyCard}>
             <div className={styles.companyDetailsWrapper}>
                 <div className={styles.companyDetails}>
-                    <img className={styles.companyImage} src={collectionLogo[0]} alt="" />
+                    <img className={styles.companyImage} src={collectionLogo[1]} alt="" />
                     <div className="flex flex-col items-start gap-1 p-1">
                         <h1 className={styles.companyTitle}>{collectionName}</h1>
                         <p className={styles.companyDesc}>{collectionDescription}</p>
@@ -40,13 +40,13 @@ const CompanyCard = ({$id, collectionName, collectionDescription, collectionLogo
     )
 }
 const styles = {
-    companyCard: "relative group cursor-pointer p-3 rounded-xl border dark:border-gray-800 border-pink-200 hover:border-pink-300 h-[200px] w-[400px] flex flex-col gap-5 justify-between dark:bg-[rgb(27,27,39)] dark:hover:bg-gray-800 hover:bg-pink-50 bg-white",
+    companyCard: "relative group cursor-pointer p-3 rounded-xl border dark:border-gray-800 border-pink-200 hover:border-pink-300 h-[200px] w-[400px] flex flex-col gap-5 justify-between dark:bg-[rgb(20,20,31)] dark:hover:bg-gray-800 hover:bg-pink-50 bg-white",
     companyDetailsWrapper: "flex justify-between items-start",
     companyDetails: "flex gap-5",
     companyImage: "w-[80px] h-[80px] rounded-xl object-cover",
     companyTitle: "font-bold dark:text-gray-300 text-gray-900",
     companyDesc: "dark:text-gray-500 text-gray-500 font-semibold text-xs line-clamp-3",
-    DeleteIcon: "absolute top-1 right-1 hidden group-hover:flex transition-all duration-1000 linear text-3xl cursor-pointer text-red-600 hover:text-red-500 hover:scale-125",
+    DeleteIcon: "absolute top-1 right-1 hidden group-hover:flex transition-all duration-1000 linear text-xl cursor-pointer text-red-600 hover:text-red-500 hover:scale-125",
     buttons: "flex items-center justify-center gap-5"
 }
 export default CompanyCard

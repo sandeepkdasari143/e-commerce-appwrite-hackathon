@@ -1,16 +1,18 @@
 import React from 'react'
 import SecondaryButton from '../../../components/buttons/SecondaryButton';
 import AddButton from '../../../components/buttons/AddButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_MODAL } from '../../../redux-store/modal.slice';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import AppWriteDB from '../../../../appwrite-services/database.service';
 import AppWriteStorage from '../../../../appwrite-services/storage.service';
-import { ECOMM_DB_ID } from '../../../../appwrite-services/appWriteSecrets';
+import { COLLECTIONS_ID, ECOMM_DB_ID } from '../../../../appwrite-services/appWriteSecrets';
 import { ADD_COLLECTION } from '../../../redux-store/sellerStore.slice';
+import { SET_DATA_POSTING } from '../../../redux-store/global.slice';
 
 const CompanyForm = () => {
     const dispatch = useDispatch();
+    const isLoading = useSelector(store => store.globalState.isDataPosting)
     const db = new AppWriteDB();
     const storage = new AppWriteStorage();
 
@@ -22,6 +24,7 @@ const CompanyForm = () => {
 
     const createCollection = async(event) => {
         event.preventDefault();
+        dispatch(SET_DATA_POSTING(true));
         const fileUploadResponse = await storage.uploadFile(`collectionLogo`, newCollection.collectionLogo);
         if (fileUploadResponse) {
             const PAYLOAD = {
@@ -29,10 +32,11 @@ const CompanyForm = () => {
                 collectionDescription: newCollection.collectionDescription,
                 collectionLogo: fileUploadResponse
             };
-            const newCollectionData = await db.createDoc(ECOMM_DB_ID, '6483fcc139bfc48895c7', PAYLOAD);
+            const newCollectionData = await db.createDoc(ECOMM_DB_ID, COLLECTIONS_ID, PAYLOAD);
             if (newCollectionData) {
                 dispatch(ADD_COLLECTION(newCollectionData));
-                dispatch(CLOSE_MODAL())
+                dispatch(CLOSE_MODAL());
+                dispatch(SET_DATA_POSTING(false));
             }
         }
     }
@@ -111,7 +115,11 @@ const CompanyForm = () => {
                     </div>
                     <footer className={styles.footerButtons}>
                         <SecondaryButton onClick={()=>dispatch(CLOSE_MODAL())}>Cancel</SecondaryButton>
-                        <AddButton type="submit">Add In Collection</AddButton>
+                        {isLoading ?
+                                <AddButton disabled={true}>Loading...</AddButton> :
+                                <AddButton type="submit">Register as Company</AddButton>
+                        }
+                        
                     </footer>
                 </form>        
             </div>

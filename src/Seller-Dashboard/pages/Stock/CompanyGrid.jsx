@@ -3,15 +3,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import CompanyCard from './CompanyCard'
 import { SET_COLLECTIONS } from "../../../redux-store/sellerStore.slice";
 import HourglassEmptyRoundedIcon from '@mui/icons-material/HourglassEmptyRounded';
+import AppWriteDB from "../../../../appwrite-services/database.service";
+import { COLLECTIONS_ID, ECOMM_DB_ID } from "../../../../appwrite-services/appWriteSecrets";
 
 const CompanyGrid = () => {
     const dispatch = useDispatch();
     const collections = useSelector(state => state.adminStore.collections)
-    console.log(collections)
+    const db = new AppWriteDB();
 
     useEffect(() => {
         async function fetchCollections() {
-            
+            const collections = await db.getAllDocs(ECOMM_DB_ID, COLLECTIONS_ID);
+            dispatch(SET_COLLECTIONS(collections));
             return;
         }
         fetchCollections();
@@ -25,7 +28,7 @@ const CompanyGrid = () => {
     )
 
     return (
-        <div className="h-full bg-pink-50 dark:bg-[rgb(27,27,39)] w-[50%] border dark:border-gray-800 border-pink-200">
+        <div className="rounded-md h-full bg-pink-50 dark:bg-[rgb(27,27,39)] w-[50%] border dark:border-gray-800 border-pink-200">
             <div className='h-full overflow-auto w-full flex flex-wrap gap-5 justify-center py-5 '>
                 {collections?.map((collection) => (
                     <CompanyCard key={collection.$id} {...collection} />
